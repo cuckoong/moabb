@@ -14,7 +14,7 @@ from . import download as dl
 import logging
 
 log = logging.getLogger()
-GIGA_URL = '/content/drive/My Drive/braindecode_data/cho2017'  # noqa
+GIGA_URL = '/content/drive/My Drive/braindecode_data/cho2017/'  # noqa
 
 
 class Cho2017(BaseDataset):
