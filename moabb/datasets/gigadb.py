@@ -14,7 +14,7 @@ from . import download as dl
 import logging
 
 log = logging.getLogger()
-GIGA_URL = '/content/drive/My Drive/braindecode_data/cho2017/'  # noqa
+GIGA_URL = '/Users/cu/Downloads/cho2017/mat_data/'  # noqa
 
 
 class Cho2017(BaseDataset):
@@ -69,6 +69,7 @@ class Cho2017(BaseDataset):
         for ii in [32, 46, 49]:
             self.subject_list.remove(ii)
 
+
     def _get_single_subject_data(self, subject):
         """return data for a single subject"""
         fname = self.data_path(subject)
@@ -80,7 +81,7 @@ class Cho2017(BaseDataset):
                         'FC5', 'FC3', 'FC1', 'C1', 'C3', 'C5', 'T7', 'TP7',
                         'CP5', 'CP3', 'CP1', 'P1', 'P3', 'P5', 'P7', 'P9',
                         'PO7', 'PO3', 'O1', 'Iz', 'Oz', 'POz', 'Pz', 'CPz',
-                        'Fpz', 'Fp2', 'AF8', 'AF4', 'AFz', 'Fz', 'F2', 'F4',
+                        'FPz', 'FP2', 'AF8', 'AF4', 'AFz', 'Fz', 'F2', 'F4',
                         'F6', 'F8', 'FT8', 'FC6', 'FC4', 'FC2', 'FCz', 'Cz',
                         'C2', 'C4', 'C6', 'T8', 'TP8', 'CP6', 'CP4', 'CP2',
                         'P2', 'P4', 'P6', 'P8', 'P10', 'PO8', 'PO4', 'O2']
@@ -105,9 +106,8 @@ class Cho2017(BaseDataset):
                     "continuous data -- edge effects present")
 
         info = create_info(ch_names=ch_names, ch_types=ch_types,
-                           sfreq=data.srate)
+                           sfreq=data.srate, montage=montage)
         raw = RawArray(data=eeg_data, info=info, verbose=False)
-        raw.set_montage(montage)
 
         return {'session_0': {'run_0': raw}}
 
@@ -116,6 +116,12 @@ class Cho2017(BaseDataset):
         if subject not in self.subject_list:
             raise(ValueError("Invalid subject number"))
 
-        url = '{:s}s{:02d}.mat'.format(GIGA_URL, subject)
-        return dl.data_path(url, 'GIGADB', path, force_update, update_path,
-                            verbose)
+        url = '{}s{:02d}.mat'.format(GIGA_URL, subject)
+
+        return url
+
+        # return dl.data_path(url, 'GIGADB', path, force_update, update_path,
+        #                     verbose)
+
+
+
