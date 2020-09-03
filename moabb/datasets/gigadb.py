@@ -106,7 +106,7 @@ class Cho2017(BaseDataset):
                     "continuous data -- edge effects present")
 
         info = create_info(ch_names=ch_names, ch_types=ch_types,
-                           sfreq=data.srate, montage=montage)
+                           sfreq=data.srate)#, montage=montage)
         raw = RawArray(data=eeg_data, info=info, verbose=False)
 
         return {'session_0': {'run_0': raw}}
